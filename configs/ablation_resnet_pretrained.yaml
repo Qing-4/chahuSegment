@@ -1,0 +1,26 @@
+dataset:
+  name: AGI-FBHC/ChaHu
+  split: CN
+  image_size: 512
+  mask_bin_threshold: 128
+  seed: 42
+model:
+  attention: true
+  backbone: resnet34
+  pretrained: true
+
+train:
+  batch_size: 8
+  epochs: 50
+  learning_rate: 1.0e-4
+  weight_decay: 1.0e-4
+  early_stop_patience: 10
+  early_stop_min_delta: 1.0e-4
+  plateau_patience: 3
+  plateau_factor: 0.5
+  min_lr: 1.0e-6
+
+paths:
+  checkpoint_dir: runs/resnet_pretrained/checkpoints
+  log_dir: runs/resnet_pretrained/logs
+  output_dir: runs/resnet_pretrained/outputs

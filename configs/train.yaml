@@ -1,0 +1,25 @@
+# 训练 / 评估 / 推理共用配置
+dataset:
+  name: AGI-FBHC/ChaHu
+  split: CN
+  image_size: 512
+  mask_bin_threshold: 128   # mask 二值化阈值（≥128 视为前景，排除抗锯齿软边）
+  seed: 42
+
+model:
+  attention: true   # 跳跃连接上启用注意力门（Attention U-Net）；false 则为标准 U-Net
+
+train:
+  batch_size: 8
+  epochs: 50
+  learning_rate: 1.0e-4
+  early_stop_patience: 10
+  early_stop_min_delta: 1.0e-4
+  plateau_patience: 3
+  plateau_factor: 0.5
+  min_lr: 1.0e-6
+
+paths:
+  checkpoint_dir: checkpoints
+  log_dir: logs
+  output_dir: outputs

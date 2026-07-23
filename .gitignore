@@ -1,0 +1,52 @@
+# ===== Python =====
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# ===== 虚拟环境 =====
+.venv/
+venv/
+env/
+ENV/
+
+# ===== IDE / 编辑器 =====
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# ===== 操作系统 =====
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ===== 数据集 / 原始数据（体积大，不入库；从 HuggingFace 下载）=====
+data/
+datasets/data/
+datasets/raw/
+*.zip
+*.tar
+*.tar.gz
+
+# ===== 模型权重 / checkpoint =====
+checkpoints/
+*.pth
+*.pt
+*.ckpt
+*.onnx
+
+# ===== 训练 / 实验输出（可复现，不入库）=====
+runs/
+outputs/
+results_baseline_attn/
+logs/
+*.log
+
+# 保留说明文档中引用的图片（docs/images 需要入库）
+!docs/images/
