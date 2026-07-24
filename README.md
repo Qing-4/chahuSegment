@@ -225,13 +225,13 @@ class ResNetUNet(nn.Module):
 
 ## 六、消融实验
 
-> 本节为在基线 U-Net 之上的改进实验，消融对比**指标均为验证集 (val) 结果**。三组除 encoder 外训练配方完全一致，用于干净拆解「换预训练主干」的增益来源。
+> 三组除 encoder 外训练配方完全一致，用于干净拆解「换预训练主干」的增益来源。
 
 ### 结果
 
 ![](docs/images/ablation_bars.png)
 
-| 模型| best val_dice | 最佳 epoch | 实跑 epoch |  |
+| 模型| best val_dice | 最佳 epoch | 实跑 epoch ||
 | --- | --- | --- | --- | --- |
 | UNet+注意力门 | 0.9534 | 39 | 49 |
 | ResNet34 结构·随机初始化 | 0.9580 | 35 | 45 |
