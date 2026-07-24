@@ -158,7 +158,7 @@ class ResNetUNet(nn.Module):
 
 训练曲线：
 
-![](runs/resnet_pretrained/training_curve.png)
+![](docs/images/training_curve.png)
 
 观察：
 * `train_loss` 从 0.35 → 0.012 持续单调下降。
