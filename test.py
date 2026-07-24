@@ -30,7 +30,7 @@ from metrics import (
     fg_ratio_bucket,
     viewpoint_bucket,
 )
-from unet import UNet
+from unet import UNet, ResNetUNet
 from utils.checkpoint import load_checkpoint
 from utils.common import get_device, load_config
 from utils.visualize import save_triplet
@@ -44,7 +44,10 @@ METRIC_KEYS = ("dice", "iou", "precision", "recall", "pixel_accuracy")
 def evaluate(cfg: dict) -> None:
     dataset_config = cfg["dataset"]
     path_config = cfg["paths"]
-    use_attention = cfg.get("model", {}).get("attention", False)
+    model_config = cfg.get("model", {})
+    use_attention = model_config.get("attention", False)
+    backbone = model_config.get("backbone", "unet")
+    pretrained = model_config.get("pretrained", True)
 
     # ---------- 数据集参数 ----------
     dataset_name = dataset_config["name"]
@@ -84,7 +87,12 @@ def evaluate(cfg: dict) -> None:
     device = get_device()
     print(f"使用设备: {device}")
 
-    model = UNet(n_channels=3, n_classes=1, bilinear=True, attention=use_attention).to(device)
+    if backbone == "resnet34":
+        model = ResNetUNet(n_channels=3, n_classes=1, attention=use_attention, pretrained=pretrained).to(device)
+        print(f"模型: ResNetUNet (encoder=resnet34, pretrained={pretrained}, attention={use_attention})")
+    else:
+        model = UNet(n_channels=3, n_classes=1, bilinear=True, attention=use_attention).to(device)
+        print(f"模型: UNet (attention={use_attention})")
     checkpoint = load_checkpoint(model, checkpoint_path, device)
     if checkpoint:
         epoch = checkpoint.get("epoch")
